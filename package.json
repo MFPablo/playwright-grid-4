@@ -3,7 +3,7 @@
 "version": "1.0.0",
 "main": "index.js",
 "scripts": {
-    "test": "cross-env SELENIUM_REMOTE_URL=http://localhost:30001/ npx playwright test"
+    "test": "npx playwright test"
 },
 "repository": {
     "type": "git",
