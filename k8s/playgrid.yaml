@@ -313,7 +313,7 @@ metadata:
     name: selenium-chrome-node
     component: "selenium-grid-4"
 spec:
-  replicas: 1
+  replicas: 13
   selector:
     matchLabels:
       app: selenium-chrome-node
@@ -340,7 +340,7 @@ spec:
               cpu: "1"
             limits:
               memory: "1Gi" 
-              cpu: "8"   
+              cpu: "16"   
           env:
             - name: START_XVFB
               value: "false"
@@ -355,9 +355,9 @@ spec:
             - name: SE_EVENT_BUS_SUBSCRIBE_PORT
               value: "4443"
             - name: SE_NODE_MAX_INSTANCES
-              value: "8"
+              value: "16"
             - name: SE_NODE_MAX_SESSIONS
-              value: "8"    
+              value: "16"    
       volumes:
         - name: dshm
           emptyDir: { "medium": "Memory" }

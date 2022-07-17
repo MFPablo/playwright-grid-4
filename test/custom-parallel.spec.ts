@@ -3,21 +3,12 @@ import { sleep } from './utils';
 
 test.describe.configure({ mode: 'parallel' });
 
-for(let i=0; i<7; i++){
+for(let i=0; i<100; i++){
 	test(`runs ${[i]}`, async ({ page }) => {
 		await page.goto('https://playwright.dev/');
 		await page.click('text=Get Started');
+		const h1 = page.locator('h1');
+  		await expect(h1).toHaveText('Getting started');
 		await sleep(10000);
 	});
 }
-
-// let data: string[] = <DATA>;
-
-// data.forEach( (data, i) => {
-// 	test(`runs first ${pages[i]}`, async ({ page }) => {
-// 				await page.goto('https://playwright.dev/');
-// 				await page.click('text=Get Started');
-// 				await sleep(10000);
-// 	});
-// })
-
