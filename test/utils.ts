@@ -1,24 +1,65 @@
 require('dotenv').config();
-import { exit } from "process";
-
+import { Page, Browser, BrowserContext, chromium, BrowserType,  } from '@playwright/test';
 
 const defaultTimeout = 15000;
 
-export const sleep = async (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
+export const createChrome = async (custom?: string):Promise<Page> => {
+ const browser = await chromium.launch({
+  args: [
+    "--use-fake-device-for-media-stream",
+    "--use-fake-ui-for-media-stream",
+    "--allow-file-access-from-files",
+    "--use-file-for-fake-audio-capture=./samples/audio.wav"
+  ]
+ });
 
+ const context = await browser.newContext()
+ 
+ await context.grantPermissions([
+  'notifications',
+  'microphone',
+  'camera',
+  'geolocation'
+  ]);
 
-// export const get = async (
-//     driver: WebDriver,
-//     selector: string,
-//     timeout = defaultTimeout
-//   ) => {
-//     const el = await driver.wait(
-//       until.elementLocated(By.css(selector)),
-//       timeout || defaultTimeout
-//     );
-//     return driver.wait(until.elementIsVisible(el), timeout || defaultTimeout);
-//   };
+ return await context.newPage();
+}
+
+export const sleep = async (ms: number) => {
+  await new Promise(async (resolve) => setTimeout(resolve, ms));
+}
+export const get = async (
+    page: Page,
+    selector: string,
+    ms?: number 
+  ) =>
+    await page.locator(selector).first().elementHandle({timeout: ms || defaultTimeout})
+
+  export const getByText = async (
+    page: Page,
+    text: string,
+    ms?: number
+  ) =>
+    await get(page,`text=${text}`, ms || defaultTimeout)
+
+  export const clickByText = async (
+  page: Page,
+  text: string,
+  timeout = defaultTimeout
+  ): Promise<void> => {
+  const found = await getByText(page, text, timeout);
+  await found?.click();
+  };
+
+export const click = async (
+    page: Page,
+    selector: string,
+    timeout?: number
+    ): Promise<void> => {
+    const found = await get(page, selector, timeout);
+    await found?.click();
+    };  
+
 
 //   export const scroll = async (
 //     driver: WebDriver,
@@ -35,17 +76,7 @@ export const sleep = async (ms: number) =>
 //   driver.executeScript<{ scrollLeft: number; scrollTop: number }>(
 //     `var c = document.querySelector("${selector}"); return {scrollLeft: c.scrollLeft, scrollTop: c.scrollTop}`
 //   );
-
-
-// export const click = async (
-//     driver: WebDriver,
-//     selector: string,
-//     timeout?: number
-//     ) => {
-//     const found = await get(driver, selector, timeout);
-//     await found.click();
-//     };
-      
+ 
 // export const getByXPath = async (
 // driver: WebDriver,
 // xpath: string,
@@ -53,21 +84,8 @@ export const sleep = async (ms: number) =>
 // ): Promise<WebElement> =>
 // driver.wait(until.elementLocated(By.xpath(xpath)), timeout || defaultTimeout);
 
-// export const getByText = async (
-//     driver: WebDriver,
-//     text: string,
-//     timeout = defaultTimeout
-//   ): Promise<WebElement> =>
-//     getByXPath(driver, `//*[normalize-space() = '${text}']`, timeout);
 
-// export const clickByText = async (
-//     driver: WebDriver,
-//     text: string,
-//     timeout = defaultTimeout
-//     ): Promise<void> => {
-//     const found = await getByText(driver, text, timeout);
-//     await found.click();
-//     };
+
 
 // export const clickByXPath = async (
 //     driver: WebDriver,
