@@ -1,16 +1,20 @@
 require("dotenv").config();
-import { test, expect, Page } from '@playwright/test';
-import { createChrome, get, getByText, sleep} from './utils';
+import { test, expect, Page, BrowserContext, Browser } from '@playwright/test';
+import { get, getByText, sleep, chrome, chromeContext} from './utils';
 import { cerrarSesion, logIn, seleniumUserList, seleniumUserListCero } from './webpad-utils';
 
 const user: string[] = seleniumUserListCero();
 //const user: string[] = seleniumUserList();
-const URL: any = "https://mitct-int-web-ar.mitrol.net/webpad/login";
+const URL: any = process.env.WEBPAD_URL3;
 
+let browser: Browser;
+let context: BrowserContext;
 let page: Page;
 
 test.beforeAll(async () => {
-    page = await createChrome();
+  browser = await chrome();
+	context = await chromeContext(browser)
+	page = await context.newPage();
 });
 
 test.beforeEach(async () => {
@@ -18,10 +22,13 @@ test.beforeEach(async () => {
 });
 
 test.afterAll(async () => {
-    //await page.pause();
+	//await page.pause();
+	await browser.close()
 });
 
-test("Landing comprobation",async () => {
+test.describe.configure({ mode: 'serial' });
+
+test(`Landing comprobation`,async () => {
 	// Landing Comprobation.
 	expect(await get(page, "#logo-aguila")).toBeDefined();
 	expect(await (await get(page, "h4"))?.innerText()).toEqual("WebPad");
@@ -35,13 +42,13 @@ test("Landing comprobation",async () => {
 			await (await get(page, "#btn-submit"))?.innerText()
 	).toEqual("INGRESAR");
 });
-test("Login in and Login out",async () => {
+test(`Login in and Login out`,async () => {
 	// Iniciando con un usuario y contraseña validos.
 	await logIn(page, user[0]);
 	// Chequeo inicio sesion correcto.
 	expect(
 			await (await get(page, "span.user-name.ng-binding"))?.innerText()
-	).toEqual("selenium1");
+	).toEqual(user[0]);
 
 	// Cerrando sesion - Abriendo dropdown
 	await cerrarSesion(page);
@@ -50,7 +57,7 @@ test("Login in and Login out",async () => {
 	// Chequeo cierre de sesion correcto
 	expect(await (await get(page, "h4"))?.innerText())?.toEqual("WebPad");
 });
-test("Login con un usuario invalido",async () => {
+test(`Login con un usuario invalido`,async () => {
 	// Iniciando con un usuario y contraseña invalidos.
 	await logIn(page, "invalidUser");
 

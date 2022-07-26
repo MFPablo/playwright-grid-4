@@ -1,9 +1,9 @@
 import { test, expect, Page } from '@playwright/test';
-import { sleep } from './utils';
+import { sleep } from '../utils';
 
 test.describe.configure({ mode: 'parallel' });
 
-for(let i=0; i<100; i++){
+for(let i=0; i<1; i++){
 	test(`runs ${[i]}`, async ({ page }) => {
 		await page.goto('https://playwright.dev/');
 		await page.click('text=Get Started');

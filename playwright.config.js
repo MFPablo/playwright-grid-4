@@ -7,7 +7,7 @@ const config = {
   expect: {
     timeout: 15000
   },
-  reporter: 'html',
+  //reporter: 'html',
   forbidOnly: !!process.env.CI,
   workers: process.env.CI ? 1 : undefined,
   fullyParallel: true,
@@ -15,7 +15,7 @@ const config = {
   retries: process.env.CI ? 0 : 0,
   use: {
     browserName: 'chromium',
-    headless: true,
+    headless: false,
     trace: 'on-first-retry',
   },
   projects: [

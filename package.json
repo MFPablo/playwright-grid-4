@@ -1,31 +1,30 @@
 {
-"name": "grid-playwright",
-"version": "1.0.0",
-"main": "index.js",
-"scripts": {
-    "test": "npx playwright test",
-    "last-report": "npx playwright show-report"
-},
-"repository": {
-    "type": "git",
-    "url": "https://github.com/MFPablo/playwright-grid-4"
-},
-"author": "",
-"license": "ISC",
-"homepage": "https://github.com/MFPablo/playwright-grid-4/blob/main/README.md",
-"keywords": [],
-"description": "",
-"devDependencies": {
-    "@playwright/test": "^1.23.3",
-    "@types/node": "^12.12.3",
-    "@types/node-fetch": "^2.5.10",
-    "cross-env": "^7.0.3",
-    "dotenv": "^11.0.0",
-    "moment": "^2.29.1",
-    "typescript": "<4.1.0"
-},
-"dependencies": {
-    "yarn": "^1.22.17"
+    "name": "grid-playwright",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "npx playwright test",
+        "last-report": "npx playwright show-report"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MFPablo/playwright-grid-4"
+    },
+    "author": "",
+    "license": "ISC",
+    "homepage": "https://github.com/MFPablo/playwright-grid-4/blob/main/README.md",
+    "keywords": [],
+    "description": "",
+    "devDependencies": {
+        "@playwright/test": "^1.23.3",
+        "@types/node": "^12.12.3",
+        "@types/node-fetch": "^2.5.10",
+        "cross-env": "^7.0.3",
+        "dotenv": "^11.0.0",
+        "moment": "^2.29.1",
+        "typescript": "<4.1.0"
+    },
+    "dependencies": {
+        "yarn": "^1.22.17"
+    }
 }
-}
-  

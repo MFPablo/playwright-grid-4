@@ -3,27 +3,28 @@ import { Page, Browser, BrowserContext, chromium, BrowserType,  } from '@playwri
 
 const defaultTimeout = 15000;
 
-export const createChrome = async (custom?: string):Promise<Page> => {
- const browser = await chromium.launch({
-  args: [
-    "--use-fake-device-for-media-stream",
-    "--use-fake-ui-for-media-stream",
-    "--allow-file-access-from-files",
-    "--use-file-for-fake-audio-capture=./samples/audio.wav"
-  ]
- });
-
- const context = await browser.newContext()
- 
- await context.grantPermissions([
-  'notifications',
-  'microphone',
-  'camera',
-  'geolocation'
-  ]);
-
- return await context.newPage();
+export const chrome = async ():Promise<Browser> => { 
+  return await chromium.launch({
+    args: [
+      "--use-fake-device-for-media-stream",
+      "--use-fake-ui-for-media-stream",
+      "--allow-file-access-from-files",
+      "--use-file-for-fake-audio-capture=./samples/audio.wav"
+    ]
+   });
 }
+
+export const chromeContext = async (browser: Browser):Promise<BrowserContext> => { 
+  const context = await browser.newContext();
+  await context.grantPermissions([
+    'notifications',
+    'microphone',
+    'camera',
+    'geolocation'
+    ]);
+  return context;  
+}
+
 
 export const sleep = async (ms: number) => {
   await new Promise(async (resolve) => setTimeout(resolve, ms));

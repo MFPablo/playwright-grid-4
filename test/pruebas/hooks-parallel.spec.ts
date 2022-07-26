@@ -1,24 +1,33 @@
-import { test, expect, Page } from '@playwright/test';
-import { getByText, sleep } from './utils';
+import { test, expect, Page, Browser, BrowserContext } from '@playwright/test';
+import { chrome, chromeContext, getByText, sleep } from '../utils';
 
+let browser: Browser;
+let context: BrowserContext;
+let page: Page;
 
-for(let i=0; i<1; i++){
-	test.describe(`Test: ${[i]}`, () => {	
-		test.beforeEach(async ({ page }, testInfo) => {
-			console.log(`Running ${testInfo.title}`);
-			await page.goto('https://playwright.dev/');
-		});
+test.describe("Test:", () => {	
 
-		test.afterAll(async () => {
-		
-		});
+	test.describe.configure({ mode: 'serial' });
 
-		test('my test', async ({ page }) => {
-			await page.pause();
-			expect(page.url()).toBe('https://playwright.dev/');
-			let asd = await getByText(page,'Get Started');
-			asd.click(),
-			await sleep(3000);
-		});
-	});	
-}
+	test.beforeAll(async () => {
+		browser = await chrome();
+		context = await chromeContext(browser)
+		page = await context.newPage();
+	});
+	
+	test.beforeEach(async () => {
+		console.log(`Running Test`);
+		await page.goto('https://playwright.dev/');
+	});
+
+	test.afterAll(async () => {
+		await browser.close();
+	});
+
+	test('my test', async () => {
+		expect(page.url()).toBe('https://playwright.dev/');
+		let asd = await getByText(page,'Get Started');
+		asd?.click(),
+		await page.pause();
+	});
+});	
