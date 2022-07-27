@@ -313,7 +313,7 @@ metadata:
     name: selenium-chrome-node
     component: "selenium-grid-4"
 spec:
-  replicas: 3
+  replicas: 13
   selector:
     matchLabels:
       app: selenium-chrome-node
@@ -343,7 +343,7 @@ spec:
               cpu: "16"   
           env:
             - name: START_XVFB
-              value: "true"
+              value: "false"
             - name: SE_NODE_GRID_URL
               value: "http://localhost:30001"
             - name: SE_NODE_SESSION_TIMEOUT  
