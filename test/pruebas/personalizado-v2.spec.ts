@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { get, getByText, sleep } from "./utils";
+import { get, getByText, sleep } from "../utils";
 
 for (let i = 0; i < 150; i++) {
   test(`${i}`, async ({ page }) => {

@@ -1,12 +1,12 @@
 require("dotenv").config();
 import { test, expect, Page, BrowserContext, Browser } from "@playwright/test";
-import { get, getByText, sleep, chrome, chromeContext } from "./utils";
+import { get, getByText, sleep, chrome, chromeContext } from "../utils";
 import {
   cerrarSesion,
   logIn,
   seleniumUserList,
   seleniumUserListCero,
-} from "./webpad-utils";
+} from "../webpad-utils";
 
 const user: string[] = seleniumUserListCero();
 //const user: string[] = seleniumUserList();

@@ -1,6 +1,6 @@
 import { test, expect, Page, Browser } from "@playwright/test";
-import { chrome, chromeContext, get, sleep } from "./utils";
-import { cambiarEstado, logIn, seleniumUserListCero } from "./webpad-utils";
+import { chrome, chromeContext, get, sleep } from "../utils";
+import { cambiarEstado, logIn, seleniumUserListCero } from "../webpad-utils";
 
 const user: string[] = seleniumUserListCero();
 const URL: any = "http://google.com";
