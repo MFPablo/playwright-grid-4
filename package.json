@@ -4,7 +4,7 @@
     "main": "index.js",
     "scripts": {
         "test": "npx playwright test",
-        "last-report": "npx playwright show-report"
+        "report": "npx playwright show-report"
     },
     "repository": {
         "type": "git",
@@ -22,7 +22,7 @@
         "cross-env": "^7.0.3",
         "dotenv": "^11.0.0",
         "moment": "^2.29.1",
-        "typescript": "<4.1.0"
+        "typescript": "^4.1.0"
     },
     "dependencies": {
         "yarn": "^1.22.17"

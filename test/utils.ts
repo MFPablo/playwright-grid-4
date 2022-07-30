@@ -46,18 +46,18 @@ export const get = async (
   export const clickByText = async (
   page: Page,
   text: string,
-  timeout = defaultTimeout
+  ms?: number
   ): Promise<void> => {
-  const found = await getByText(page, text, timeout);
+  const found = await getByText(page, text, ms || defaultTimeout);
   await found?.click();
   };
 
 export const click = async (
     page: Page,
     selector: string,
-    timeout?: number
+    ms?: number
     ): Promise<void> => {
-    const found = await get(page, selector, timeout);
+    const found = await get(page, selector, ms || defaultTimeout);
     await found?.click();
     };  
 

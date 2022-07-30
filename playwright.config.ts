@@ -23,10 +23,10 @@ const config: PlaywrightTestConfig = {
       'geolocation'],
     //ignoreHTTPSErrors: true,
     //viewport: { width: 1, height: 1 },
-     //video: 'on-first-retry',
-     // trace: 'on-first-retry',
-     // browserName: 'chromium',
-     //screenshot: 'only-on-failure',
+    //video: 'on-first-retry',
+    // trace: 'on-first-retry',
+    // browserName: 'chromium',
+    //screenshot: 'only-on-failure',
   },
 projects: [  
   {
