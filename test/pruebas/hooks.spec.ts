@@ -21,13 +21,13 @@ test.describe("Test:", () => {
 	});
 
 	test.afterAll(async () => {
+		await context.close();
 		await browser.close();
 	});
 
 	test('my test', async () => {
 		expect(page.url()).toBe('https://playwright.dev/');
 		let asd = await getByText(page,'Get Started');
-		asd?.click(),
-		await page.pause();
+		await asd?.click();
 	});
 });	

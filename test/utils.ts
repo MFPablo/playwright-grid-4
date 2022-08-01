@@ -1,6 +1,7 @@
 require('dotenv').config();
 import { Page, Browser, BrowserContext, chromium, BrowserType,  } from '@playwright/test';
 
+const audioDir = `${process.env.AUDIODIR}`;
 const defaultTimeout = 15000;
 
 export const chrome = async ():Promise<Browser> => { 
@@ -9,13 +10,13 @@ export const chrome = async ():Promise<Browser> => {
       "--use-fake-device-for-media-stream",
       "--use-fake-ui-for-media-stream",
       "--allow-file-access-from-files",
-      "--use-file-for-fake-audio-capture=./samples/audio.wav"
+      `--use-file-for-fake-audio-capture=${audioDir}`
     ]
    });
 }
 
-export const chromeContext = async (browser: Browser):Promise<BrowserContext> => { 
-  const context = await browser.newContext();
+export const chromeContext = async (browser?: Browser):Promise<BrowserContext> => { 
+  const context = await (browser || await chrome()).newContext();
   await context.grantPermissions([
     'notifications',
     'microphone',
@@ -29,37 +30,38 @@ export const chromeContext = async (browser: Browser):Promise<BrowserContext> =>
 export const sleep = async (ms: number) => {
   await new Promise(async (resolve) => setTimeout(resolve, ms));
 }
+
 export const get = async (
     page: Page,
     selector: string,
     ms?: number 
   ) =>
-    await page.locator(selector).first().elementHandle({timeout: ms || defaultTimeout})
+    await page.locator(selector).first()
 
-  export const getByText = async (
-    page: Page,
-    text: string,
-    ms?: number
-  ) =>
-    await get(page,`text=${text}`, ms || defaultTimeout)
-
-  export const clickByText = async (
+export const getByText = async (
   page: Page,
   text: string,
   ms?: number
-  ): Promise<void> => {
-  const found = await getByText(page, text, ms || defaultTimeout);
-  await found?.click();
-  };
+) =>
+  await get(page,`text=${text}`, ms || defaultTimeout)
+
+export const clickByText = async (
+page: Page,
+text: string,
+ms?: number
+): Promise<void> => {
+const found = await getByText(page, text, ms || defaultTimeout);
+await found?.click();
+};
 
 export const click = async (
-    page: Page,
-    selector: string,
-    ms?: number
-    ): Promise<void> => {
-    const found = await get(page, selector, ms || defaultTimeout);
-    await found?.click();
-    };  
+  page: Page,
+  selector: string,
+  ms?: number
+  ): Promise<void> => {
+  const found = await get(page, selector, ms || defaultTimeout);
+  await found?.click();
+  };  
 
 
 //   export const scroll = async (
