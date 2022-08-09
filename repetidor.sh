@@ -1,11 +1,13 @@
 #!/bin/sh
 
 x=1
-while [ $x -le 2 ]
+echo "Inicio:" $(date)
+while [ $x -le 3 ]
 do
   yarn test load-test.spec.ts --workers=100 >> logfile
-  sleep 50s
-  kubectl delete pods --all >> podslogs
-  sleep 1m
+  sleep 8m
   x=$(( $x + 1 ))
 done
+echo "Finalizado:" $(date)
+
+

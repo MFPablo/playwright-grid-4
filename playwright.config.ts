@@ -6,7 +6,7 @@ const config: PlaywrightTestConfig = {
   expect: {
     timeout: 15000
   },
-  reporter: [['html'],['list']],
+  // reporter: [['html'],['list']],
   forbidOnly: !!process.env.CI,
   workers: process.env.CI ? 1 : undefined,
   fullyParallel: true,

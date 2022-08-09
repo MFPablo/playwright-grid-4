@@ -14,12 +14,12 @@ test.beforeAll(async () => {
   page = await browser.newPage();
 });
 
-test.afterEach(async () => {
-  //await context.close();
-  await browser.close();
-});
+// test.afterEach(async () => {
+//   //await context.close();
+//   await browser.close();
+// });
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 100; i++) {
   test("Selenium " + `${i+1}`.padStart(3, "0"), async () => {
 
     await page.goto(URL || "http://about.blank/");
@@ -40,7 +40,7 @@ for (let i = 0; i < 10; i++) {
       } catch (err) {}
     }, 20 * 1000);
 
-    await sleep(20 * 1000);
+    await sleep(2 * 1000);
     clearInterval(interval);
   });
 }
