@@ -44,9 +44,8 @@ export const get = async (
   selector: string,
   ms?: number
 ): Promise<any> =>
-  await (
-    await await page.locator(selector).first()
-  ).waitFor({ timeout: ms || defaultTimeout });
+    await page.locator(selector).first().elementHandle({ timeout: ms || defaultTimeout })
+
 
 export const getByText = async (page: Page, text: string) =>
   await page.locator(`text=${text}`).first();

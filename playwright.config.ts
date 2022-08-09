@@ -14,7 +14,7 @@ const config: PlaywrightTestConfig = {
   retries: process.env.CI ? 0 : undefined,
   use: {
     channel: 'chrome',
-    headless: !true,
+    headless: true,
     ignoreHTTPSErrors: true,
     baseURL: "about.blank",    
     permissions: [    
@@ -22,7 +22,7 @@ const config: PlaywrightTestConfig = {
       'microphone',
       'camera',
       'geolocation'],
-    screenshot: 'only-on-failure',
+    //screenshot: 'only-on-failure',
     video: 'off',
     trace: 'off',
     // viewport: null,// { width: 800, height: 600 },
