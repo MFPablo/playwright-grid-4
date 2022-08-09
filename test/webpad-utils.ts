@@ -29,17 +29,17 @@ export const logIn = async (
   page: any,
   user: string
   ) =>{
-  await page.locator("#username").fill(user);
-  await page.locator("#shown-password").fill(user);
-  await page.locator("#btn-submit").click();
+  await page.locator("#username").first().fill(user);
+  await page.locator("#shown-password").first().fill(user);
+  await page.locator("#btn-submit").first().click();
   await sleep(10000);
 }
 
 export const cambiarEstado = async (
   page: any,
 ) => {
-  await page.locator("#dropdown1").click();
-  await page.locator("i.fa.fa-check-circle").click();
+  await page.locator("#dropdown1").first().click();
+  await page.locator("i.fa.fa-check-circle").first().click();
 }
 
 export const cerrarSesion = async(

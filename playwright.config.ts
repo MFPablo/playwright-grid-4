@@ -8,13 +8,13 @@ const config: PlaywrightTestConfig = {
   },
   reporter: [['html'],['list']],
   forbidOnly: !!process.env.CI,
-  workers: process.env.CI ? 1000 : undefined,
+  workers: process.env.CI ? 1 : undefined,
   fullyParallel: true,
-  maxFailures: process.env.CI ? 1 : undefined,
-  retries: process.env.CI ? 0 : 0,
+  maxFailures: process.env.CI ? 0 : undefined,
+  retries: process.env.CI ? 0 : undefined,
   use: {
     channel: 'chrome',
-    headless: true,
+    headless: !true,
     ignoreHTTPSErrors: true,
     baseURL: "about.blank",    
     permissions: [    
@@ -25,7 +25,7 @@ const config: PlaywrightTestConfig = {
     screenshot: 'only-on-failure',
     video: 'off',
     trace: 'off',
-    viewport: null,// { width: 1, height: 1 },
+    // viewport: null,// { width: 800, height: 600 },
     // browserName: 'chromium',
   },
 projects: [  
