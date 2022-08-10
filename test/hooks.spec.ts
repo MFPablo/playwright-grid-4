@@ -1,5 +1,5 @@
 import { test, expect, Page, Browser, BrowserContext } from '@playwright/test';
-import { chrome, chromeContext, getByText, sleep } from '../utils';
+import { chrome, chromeContext, getByText, sleep } from './utils';
 
 let browser: Browser;
 let context: BrowserContext;

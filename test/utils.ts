@@ -54,38 +54,3 @@ export const click = async (page: Page, selector: string, ms?: number) => {
   const found = await page.locator(selector).first();
   await found.click({ timeout: ms || defaultTimeout });
 };
-
-// Click By Text
-// await page.click('text=<TEXT>');
-
-//   export const scroll = async (
-//     driver: WebDriver,
-//     selector: string,
-//     x: number | null,
-//     y: number | null
-//   ) => {
-//     await driver.executeScript(
-//       `document.querySelector("${selector}").scroll(${x ?? 0}, ${y ?? 0})`
-//     );
-//   };
-
-//   export const getScroll = async (driver: WebDriver, selector: string) =>
-//   driver.executeScript<{ scrollLeft: number; scrollTop: number }>(
-//     `var c = document.querySelector("${selector}"); return {scrollLeft: c.scrollLeft, scrollTop: c.scrollTop}`
-//   );
-
-// export const getByXPath = async (
-// driver: WebDriver,
-// xpath: string,
-// timeout = defaultTimeout
-// ): Promise<WebElement> =>
-// driver.wait(until.elementLocated(By.xpath(xpath)), timeout || defaultTimeout);
-
-// export const clickByXPath = async (
-//     driver: WebDriver,
-//     xpath: string,
-//     timeout = defaultTimeout
-//     ): Promise<void> => {
-//     const found = await getByXPath(driver, xpath, timeout);
-//     await found.click();
-//     };

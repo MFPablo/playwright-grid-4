@@ -1,5 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
-import { sleep } from '../utils';
+import { sleep } from './utils';
 
 test.describe.configure({ mode: 'parallel' });
 

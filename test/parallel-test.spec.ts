@@ -1,5 +1,5 @@
 import { test, Page } from '@playwright/test';
-import { sleep } from '../utils';
+import { sleep } from './utils';
 
 let page: Page;
 

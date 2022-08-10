@@ -6,7 +6,7 @@ const config: PlaywrightTestConfig = {
   expect: {
     timeout: 15000
   },
-  // reporter: [['html'],['list']],
+  reporter: [['html'],['list']],
   forbidOnly: !!process.env.CI,
   workers: process.env.CI ? 1 : undefined,
   fullyParallel: true,
@@ -22,7 +22,7 @@ const config: PlaywrightTestConfig = {
       'microphone',
       'camera',
       'geolocation'],
-    //screenshot: 'only-on-failure',
+    screenshot: 'only-on-failure',
     video: 'off',
     trace: 'off',
     // viewport: null,// { width: 800, height: 600 },
